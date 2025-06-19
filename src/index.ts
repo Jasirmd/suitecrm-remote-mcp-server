@@ -1,5 +1,5 @@
-import { McpAgent } from "@modelcontextprotocol/sdk/dist/esm/agent";
-import { McpServer } from "@modelcontextprotocol/sdk/dist/esm/server";
+import { McpAgent } from "@modelcontextprotocol/sdk";
+import { McpServer } from "@modelcontextprotocol/sdk";
 import { z } from "zod";
 
 // SuiteCRM Configuration
