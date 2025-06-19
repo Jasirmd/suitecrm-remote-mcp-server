@@ -4,24 +4,21 @@
   "main": "src/index.ts",
   "compatibility_date": "2025-03-10",
   "compatibility_flags": ["nodejs_compat"],
-  "build": {
-  "external": [
-    "@modelcontextprotocol/sdk/server/index.js",
-    "@modelcontextprotocol/sdk/agent/index.js"
-  ]
-},
   "migrations": [
     {
       "tag": "v1",
-      "new_classes": ["MyMCP"]
+      "new_classes": ["MyMCP"]  // Changed from new_sqlite_classes to new_classes
     }
   ],
   "durable_objects": {
     "bindings": [
       {
-        "name": "MCP_OBJECT",
-        "class_name": "MyMCP"
+        "name": "MyMCP",        // Changed name to match the export
+        "class_name": "MyMCP"   // This should match your exported class name
       }
     ]
+  },
+  "observability": {
+    "enabled": true
   }
 }
