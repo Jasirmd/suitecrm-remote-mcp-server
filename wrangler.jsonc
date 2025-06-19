@@ -3,22 +3,5 @@
   "name": "suitecrm-remote-mcp-server",
   "main": "src/index.ts",
   "compatibility_date": "2025-03-10",
-  "compatibility_flags": ["nodejs_compat"],
-  "migrations": [
-    {
-      "tag": "v1",
-      "new_classes": ["MyMCP"]  // Changed from new_sqlite_classes to new_classes
-    }
-  ],
-  "durable_objects": {
-    "bindings": [
-      {
-        "name": "MyMCP",        // Changed name to match the export
-        "class_name": "MyMCP"   // This should match your exported class name
-      }
-    ]
-  },
-  "observability": {
-    "enabled": true
-  }
+  "compatibility_flags": ["nodejs_compat"]
 }
