@@ -1,5 +1,5 @@
-import { McpAgent } from "@modelcontextprotocol/api";
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { McpAgent } from "@modelcontextprotocol/sdk/agent";
+import { McpServer } from "@modelcontextprotocol/sdk/server";
 import { z } from "zod";
 
 // SuiteCRM Configuration
