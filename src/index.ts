@@ -472,17 +472,20 @@ export class SuiteCRMMCP extends McpAgent {
 
 // Add this export statement before the default export
 export { SuiteCRMMCP as MyMCP };
+interface Env {
+  MCP_OBJECT: DurableObjectNamespace;
+}
 
 export default {
   fetch(request: Request, env: Env, ctx: ExecutionContext) {
     const url = new URL(request.url);
 
     if (url.pathname === "/sse" || url.pathname === "/sse/message") {
-      return SuiteCRMMCP.serveSSE("/sse").fetch(request, env, ctx);
+      return new SuiteCRMMCP().serveSSE(env.MCP_OBJECT, "/sse").fetch(request, env, ctx);
     }
 
     if (url.pathname === "/mcp") {
-      return SuiteCRMMCP.serve("/mcp").fetch(request, env, ctx);
+      return new SuiteCRMMCP().serve(env.MCP_OBJECT, "/mcp").fetch(request, env, ctx);
     }
 
     return new Response("Not found", { status: 404 });
