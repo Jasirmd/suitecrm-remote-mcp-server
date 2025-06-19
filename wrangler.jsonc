@@ -4,6 +4,12 @@
   "main": "src/index.ts",
   "compatibility_date": "2025-03-10",
   "compatibility_flags": ["nodejs_compat"],
+  "build": {
+    "external": [
+      "@modelcontextprotocol/sdk/agent/index.js",
+      "@modelcontextprotocol/sdk/server/index.js"
+    ]
+  },
   "migrations": [
     {
       "tag": "v1",
@@ -17,8 +23,5 @@
         "class_name": "MyMCP"
       }
     ]
-  },
-  "observability": {
-    "enabled": true
   }
 }
