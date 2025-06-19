@@ -11,10 +11,7 @@
     "cf-typegen": "wrangler types",
     "type-check": "tsc --noEmit"
   },
-  "dependencies": {
-    "@modelcontextprotocol/sdk": "1.12.3",
-    "zod": "3.25.67"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@biomejs/biome": "2.0.0",
     "typescript": "5.8.3",
