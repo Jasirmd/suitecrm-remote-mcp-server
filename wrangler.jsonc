@@ -7,14 +7,14 @@
   "migrations": [
     {
       "tag": "v1",
-      "new_classes": ["MyMCP"]  // Changed from new_sqlite_classes to new_classes
+      "new_classes": ["MyMCP"]
     }
   ],
   "durable_objects": {
     "bindings": [
       {
-        "name": "MyMCP",        // Changed name to match the export
-        "class_name": "MyMCP"   // This should match your exported class name
+        "name": "MCP_OBJECT",
+        "class_name": "MyMCP"
       }
     ]
   },
