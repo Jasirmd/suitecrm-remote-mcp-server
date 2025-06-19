@@ -1,4 +1,4 @@
-import { McpAgent } from "agents/mcp";
+import { McpAgent } from "@modelcontextprotocol/api";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 
@@ -73,14 +73,21 @@ class SuiteCRMAPI {
 // Define our MCP agent with SuiteCRM tools
 export class SuiteCRMMCP extends McpAgent {
   private api: SuiteCRMAPI;
-  server = new McpServer({
-    name: "SuiteCRM API",
-    version: "1.0.0",
-  });
+  server: McpServer;
+  state: DurableObjectState;
 
-  constructor() {
+  constructor(state: DurableObjectState, env: Env) {
     super();
+    this.state = state;
     this.api = new SuiteCRMAPI();
+    this.server = new McpServer({
+      name: "SuiteCRM API",
+      version: "1.0.0",
+    });
+  }
+
+  async fetch(request: Request) {
+    return await this.handle(request);
   }
 
   async init() {
@@ -470,8 +477,9 @@ export class SuiteCRMMCP extends McpAgent {
   }
 }
 
-// Add this export statement before the default export
+// Export the Durable Object class
 export { SuiteCRMMCP as MyMCP };
+
 interface Env {
   MCP_OBJECT: DurableObjectNamespace;
 }
@@ -479,13 +487,15 @@ interface Env {
 export default {
   fetch(request: Request, env: Env, ctx: ExecutionContext) {
     const url = new URL(request.url);
+    const id = env.MCP_OBJECT.idFromName("default");
+    const obj = env.MCP_OBJECT.get(id);
 
     if (url.pathname === "/sse" || url.pathname === "/sse/message") {
-      return new SuiteCRMMCP().serveSSE(env.MCP_OBJECT, "/sse").fetch(request, env, ctx);
+      return obj.fetch(request);
     }
 
     if (url.pathname === "/mcp") {
-      return new SuiteCRMMCP().serve(env.MCP_OBJECT, "/mcp").fetch(request, env, ctx);
+      return obj.fetch(request);
     }
 
     return new Response("Not found", { status: 404 });
